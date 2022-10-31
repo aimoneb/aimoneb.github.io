@@ -15,6 +15,10 @@ Here's my website, queen
 knitr::include_graphics("./media/wings.png")
 ```
 
+## Here's some links 
 
+[About me!](https://aimoneb.github.io/aboutme/)
+
+[Something to make you not want to die :)](https://www.youtube.com/watch?v=roQGFJmd5Dc)
 
 
