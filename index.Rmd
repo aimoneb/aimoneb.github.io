@@ -22,3 +22,6 @@ knitr::include_graphics("./media/wings.png")
 [Something to make you not want to die :)](https://www.youtube.com/watch?v=roQGFJmd5Dc)
 
 
+# here's a gif 
+![](./media/cinder.webp)
+
