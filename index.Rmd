@@ -1,0 +1,20 @@
+---
+output: html_document
+pagetitle: "your mom's a hoe"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE)
+
+library(tidyverse)
+
+
+```
+Here's my website, queen
+```{r fig.align='center'}
+knitr::include_graphics("./media/wings.png")
+```
+
+
+
+
