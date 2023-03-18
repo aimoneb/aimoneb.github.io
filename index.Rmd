@@ -1,29 +1,124 @@
 ---
 output: html_document
-pagetitle: "your mom's a hoe"
+pagetitle: "Behlee Aimone"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE,warning=FALSE,message=FALSE)
 
 library(tidyverse)
-
+library(janitor)
+library(stringr)
+library(ggpubr)
+library(broom)
+library(AICcmodavg)
+library(kableExtra)
 
 ```
-Here's my website, queen
+# Here's my website, queen
 ```{r fig.align='center'}
 knitr::include_graphics("./media/wings.png")
 ```
 
-## Here's some links 
-
-[About me!](https://aimoneb.github.io/aboutme/)
-
-[Something to make you not want to die :)](https://www.youtube.com/watch?v=roQGFJmd5Dc)
+## About me:
 
 
-# you're welcome
-![](./media/cinder.webp)
-![](./media/pinkmcd.webp)
+
+
+
+
+## Personal links/code contributions:
+
+[Git hub](https://github.com/aimoneb)
+
+[Zenodo release](https://zenodo.org/record/7729694#.ZBT5-uzMKrM)
+
+---
+
+---
+
+## Data sets I have actually worked with: 
+##### Here is a glimpse of a real life data set about covid that I scraped and cleaned from the CDC
+```{r}
+
+covid_df<-read_csv("./data/cleaned_covid_data.csv") %>% clean_names()
+
+head(covid_df) %>% kable() %>% 
+  kable_classic(lightable_options = 'hover')
+```
+##### From this data set we can look at Covid trends by state
+```{r}
+knitr::include_graphics("./figures/a_state.png")
+```
+
+##### We can rank states by their maximum fatality ratio
+```{r}
+state_max_fatality_rate<-covid_df %>% 
+  group_by(province_state) %>% 
+  summarise(maximum_fatality_ratio = max(case_fatality_ratio,na.rm = TRUE)) %>% 
+  arrange(desc(maximum_fatality_ratio))
+
+p1<-state_max_fatality_rate %>% 
+  mutate(province_state = factor(province_state,levels = province_state)) %>% 
+  ggplot(aes(x=province_state, y=maximum_fatality_ratio))+
+  geom_col(fill= "#f205d7")+
+  theme_bw()+
+  theme(axis.text.x = element_text(angle = 90,hjust = 1))
+
+plotly::ggplotly(p1)
+```
+
+##### And show the cumulative death toll over time (this plot is interactive if you scroll your cursor over the line)
+```{r}
+p<-covid_df %>% 
+  group_by(last_update) %>% 
+  summarise(totaldeaths = sum(deaths, na.rm = TRUE)) %>% 
+  ggplot(aes(x=last_update, y =totaldeaths)) + 
+  geom_point()+
+  theme_bw()
+plotly::ggplotly(p)
+```
+
+---
+
+##### Analysis of a data set regaurding faculty salaries
+
+```{r}
+fac_dat<-read_csv("./data/FacultySalaries_1995.csv")
+head(fac_dat)
+```
+
+###### This is not a "tidy" data set, so I can clean it by writing a function that can be used over and over
+```{r}
+fac_dat<-read_csv("./data/FacultySalaries_1995.csv") %>% clean_names() %>% 
+  pivot_longer(c(ends_with("salary")), names_to = "rank", values_to = "salary",names_prefix = "avg_") %>% 
+  pivot_longer(c(ends_with("comp")), names_to = "comp_type", values_to = "comp_amt") %>% 
+  pivot_longer(c(num_full_profs,num_assoc_profs,num_assist_profs), names_to = "faculty_type", values_to = "faculty_count")
+fac_dat %>% head() 
+
+```
+
+
+
+
+###### Real life data sets can be pretty hard to understand. It is my job to make them manageable to look at and informative!
+```{r}
+knitr::include_graphics("./figures/salary.png")
+
+```
+
+###### The most powerful tool a data analyst has (besides vidualizing data), is modeling data to make presictions. 
+
+```{r}
+
+twoway<-aov(salary~state+rank+tier, data = fac_dat)
+summary(twoway)
+```
+###### This is an ANOVA model which is a linear modeling method to evaluate the relationships between variables. It can rank the variables based on their impact on the outcome. We can use tools like this to identify variables to explore in making changes to our experiments, workflow, or to make predications for the future. 
+
+
+###### ANOVA is just one method of modeling. There are countless others that are readily usable with R studio. It is my job to use the objectivity of the data software to select the model that best fits each unique data set. 
+
+
 
 

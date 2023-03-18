@@ -1,0 +1,13 @@
+name: brooks
+title: brooks
+username:
+account: aimoneb
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8005169
+bundleId: 6718868
+url: https://aimoneb.shinyapps.io/brooks/
+when: 1673380129.61272
+lastSyncTime: 1673380129.61273
+asMultiple: FALSE
+asStatic: FALSE
