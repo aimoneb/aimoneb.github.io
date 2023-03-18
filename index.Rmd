@@ -1,5 +1,9 @@
 ---
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: TRUE
 pagetitle: "Behlee Aimone"
 ---
 
@@ -13,19 +17,38 @@ library(ggpubr)
 library(broom)
 library(AICcmodavg)
 library(kableExtra)
-
 ```
-# Here's my website, queen
+# Behlee Aimone
 ```{r fig.align='center'}
-knitr::include_graphics("./media/wings.png")
+knitr::include_graphics("./media/ba.png")
 ```
 
-## About me:
+## Contact: 
+
+##### Phone: 307-780-5293
+##### Email: behleeannaimone@yahoo.com
+
+---
+
+---
+
+## About:
+
+```{r fig.align='center'}
+knitr::include_graphics("./media/sculpt.jpeg")
+knitr::include_graphics("./media/half.jpg")
+knitr::include_graphics("./media/bailey.jpeg")
+knitr::include_graphics("./media/phoebe.jpeg")
+```
+
+##### Hi, I'm Behlee; dog mom, lover of treats, bacteria, the office, JB, and the color pink! I grew up, the youngest of eight, on a family ranch in rural Wyoming (like seriously... RURAL) where I worked cattle, participated in sports and did normal kid things. I moved to the big city (Orem Utah) in 2018 right after I graduated high school to pursue my academic dreams at Utah Valley University. I found the love of my life in calculus and got married in August of 2019 (very Utah... I know) and continued to fall in love with Biology and all things science. During my time at UVU, I have been honored and privileged to work in two undergraduate research labs with Dr. [Lauren Brooks](https://www.uvu.edu/directory/employee/?id=NHdLS3JSbDE2NS9oZ29XR1k2cXlyUT09) and Dr. [Geoff Zahn](https://gzahn.github.io/). In both Dr. Brooks's and Dr. Zahn's labs I led funded research teams of undergraduates and presented our findings at local poster sessions. Peer mentoring and team-based learning have become passions of mine at UVU and have taught me that inclusivity and accessibility are the foundation of collaboration. I am excited to continue collaborating and working with others as I enter the workforce. 
+##### I became passionate about data science after working with Dr. Zahn in his intro to r studio class. Since taking his class I have created a shiny app currently in use in the research labs at UVU and have actively participated in preparing a manuscript for publication on the microbiome of seagrass in South Asia. I experienced how fulfilling it is to work with complex data structures, use machine learning, scrape web data, do complex statistical analysis (MRM, NMDS, decision trees, etc.), and work on code collaboratively. Data analytics excites me. I love that it is an ever-changing field and is fast-paced and challenging. I am ready to continue improving my coding skills and learn innovative ways to utilize data because the future should be data-driven. 
 
 
 
+---
 
-
+---
 
 ## Personal links/code contributions:
 
@@ -37,8 +60,8 @@ knitr::include_graphics("./media/wings.png")
 
 ---
 
-## Data sets I have actually worked with: 
-##### Here is a glimpse of a real life data set about covid that I scraped and cleaned from the CDC
+## Output/Code examples: 
+##### Here is a glimpse of a real-life data set about covid that I scraped and cleaned from the CDC
 ```{r}
 
 covid_df<-read_csv("./data/cleaned_covid_data.csv") %>% clean_names()
@@ -81,7 +104,7 @@ plotly::ggplotly(p)
 
 ---
 
-##### Analysis of a data set regaurding faculty salaries
+##### Analysis of a data set regarding faculty salaries 
 
 ```{r}
 fac_dat<-read_csv("./data/FacultySalaries_1995.csv")
@@ -91,30 +114,33 @@ head(fac_dat)
 ###### This is not a "tidy" data set, so I can clean it by writing a function that can be used over and over
 ```{r}
 fac_dat<-read_csv("./data/FacultySalaries_1995.csv") %>% clean_names() %>% 
-  pivot_longer(c(ends_with("salary")), names_to = "rank", values_to = "salary",names_prefix = "avg_") %>% 
+  pivot_longer(c(ends_with("salary")), names_to = "rank", values_to = "salary",names_prefix = "avg_")%>%
   pivot_longer(c(ends_with("comp")), names_to = "comp_type", values_to = "comp_amt") %>% 
-  pivot_longer(c(num_full_profs,num_assoc_profs,num_assist_profs), names_to = "faculty_type", values_to = "faculty_count")
-fac_dat %>% head() 
+  pivot_longer(c(num_full_profs,num_assoc_profs,num_assist_profs), names_to ="faculty_type",
+  values_to="faculty_count")
+
+head(fac_dat) %>% kable() %>% kable_classic(lightable_options = 'hover')
 
 ```
 
 
 
 
-###### Real life data sets can be pretty hard to understand. It is my job to make them manageable to look at and informative!
+###### Real-life data sets can be pretty hard to understand. It is my job to make them manageable to look at and informative!
 ```{r}
 knitr::include_graphics("./figures/salary.png")
 
 ```
 
-###### The most powerful tool a data analyst has (besides vidualizing data), is modeling data to make presictions. 
+###### The most powerful tool a data analyst has (besides visualizing data), is modeling data to make predictions.  
 
 ```{r}
 
 twoway<-aov(salary~state+rank+tier, data = fac_dat)
 summary(twoway)
 ```
-###### This is an ANOVA model which is a linear modeling method to evaluate the relationships between variables. It can rank the variables based on their impact on the outcome. We can use tools like this to identify variables to explore in making changes to our experiments, workflow, or to make predications for the future. 
+###### This is an ANOVA model which is a linear modeling method to evaluate the relationships between variables. It can rank the variables based on their impact on the outcome. We can use tools like this to identify variables to explore in making changes to our experiments, and workflow or to make predictions for the future. 
+
 
 
 ###### ANOVA is just one method of modeling. There are countless others that are readily usable with R studio. It is my job to use the objectivity of the data software to select the model that best fits each unique data set. 
