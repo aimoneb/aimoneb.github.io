@@ -60,6 +60,34 @@ knitr::include_graphics("./media/phoebe.jpeg")
 
 ---
 
+## Research Experience:
+
+```{r}
+knitr::include_graphics("./media/slim_mold.png")
+```
+
+#### SAC funded research on slime molds ability to consume and control pathogenic bacterial growth 
+
+```{r}
+knitr::include_graphics("./media/poison_frog.png")
+```
+
+#### Nucleotide analysis on the phylogenetic relationships of poison dart frogs in Central and South America
+###### analysis performed using [NCBI,](https://www.ncbi.nlm.nih.gov/) [NGPhylogeny,](https://ngphylogeny.fr/) and [FigTree v1.4.4](https://github.com/rambaut/figtree)
+
+
+```{r}
+knitr::include_graphics("./media/staph_poster.png")
+```
+
+#### Sculpt funded research of biocide efficacy on <i> S. aurues </i>
+
+###### analysis performed using R studio
+
+---
+
+---
+
 ## Output/Code examples: 
 ##### Here is a glimpse of a real-life data set about covid that I scraped and cleaned from the CDC
 ```{r}
